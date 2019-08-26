@@ -1,9 +1,8 @@
 import ApolloClient from 'apollo-client';
 import { AppProps, default as NextApp } from 'next/app';
 import Head from 'next/head';
-import PropTypes from 'prop-types';
 import React from 'react';
-import { getDataFromTree } from 'react-apollo';
+import { getDataFromTree } from '@apollo/react-ssr';
 import initApollo from './apollo';
 import {
   ApolloContext,
@@ -33,11 +32,6 @@ export default function withApollo<TCache = any>(
   return (App: typeof NextApp) => {
     return class WithApollo extends React.Component<ApolloProps> {
       public static displayName = `WithApollo(${getDisplayName(App)})`;
-
-      public static propTypes = {
-        apolloState: PropTypes.object,
-        apollo: PropTypes.object
-      };
 
       public static getInitialProps = async (appCtx: ApolloContext) => {
         const { Component, router, ctx } = appCtx;
